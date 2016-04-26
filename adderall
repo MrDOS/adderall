@@ -1,0 +1,77 @@
+#! /bin/sh
+
+# Adderall keeps AirPorts awake.
+#
+# See README.md for details.
+#
+# Author:  Samuel Coleman <samuel@seenet.ca>
+# URL:     https://github.com/MrDOS/adderall
+# Version: 1.0.0
+
+# The name of the Wi-Fi network interface. Should be the first interface on
+# MacBooks without a built-in Ethernet interface.
+WIFI_INTERFACE=en0
+
+# How many seconds do we want to wait between checks for Wi-Fi activity? This
+# applies to both when the interface is down (checking to see if the interface
+# has come up) and when the interface was last seen active (checking to see if
+# we should stop pinging).
+ACTIVITY_CHECK_INTERVAL=60
+
+# How frequently do we want to issue ping requests to the gateway?
+PING_INTERVAL=0.2
+
+# Check whether the Wi-Fi interface is active.
+#
+# Arguments: none
+# Returns:   0 if the interface is active; otherwise, 1
+# Outputs:   nothing
+# Modifies:  nothing
+adderall_wifi_interface_active ()
+{
+    status=`ifconfig $WIFI_INTERFACE | grep status | sed -E 's/.*: (.*)/\1/'`
+    if [ $status = 'active' ]
+    then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Determine the default gateway for the Wi-Fi interface.
+#
+# Arguments: none
+# Returns:   nothing
+# Outputs:   the default gateway
+# Modifies:  nothing
+adderall_wifi_default_gateway ()
+{
+    netstat -nr | grep default | grep en0 | awk '{print $2}'
+}
+
+# Launch the main Adderall loop.
+#
+# Arguments: none
+# Returns:   nothing
+# Outputs:   debug messages
+# Modifies:  nothing
+adderall_main ()
+{
+    while true
+    do
+        if ! adderall_wifi_interface_active
+        then
+            echo "Interface is inactive. Sleeping."
+            sleep $ACTIVITY_CHECK_INTERVAL
+            continue
+        fi
+
+        echo "Interface is active. Administering Adderall."
+
+        gateway="`adderall_wifi_default_gateway`"
+        number=`echo $ACTIVITY_CHECK_INTERVAL / $PING_INTERVAL | bc`
+        ping -q -i $PING_INTERVAL -c $number "$gateway"
+    done
+}
+
+adderall_main
