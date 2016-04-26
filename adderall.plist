@@ -6,7 +6,7 @@
         <string>adderall</string>
         <key>ProgramArguments</key>
         <array>
-            <string>/usr/bin/adderall</string>
+            <string>/usr/local/bin/adderall</string>
         </array>
         <key>StandardOutPath</key>
         <string>/var/log/adderall.log</string>

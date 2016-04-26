@@ -6,7 +6,7 @@
 #
 # Author:  Samuel Coleman <samuel@seenet.ca>
 # URL:     https://github.com/MrDOS/adderall
-# Version: 1.0.0
+# Version: 1.0.1
 
 # The name of the Wi-Fi network interface. Should be the first interface on
 # MacBooks without a built-in Ethernet interface.

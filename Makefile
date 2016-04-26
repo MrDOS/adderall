@@ -4,7 +4,8 @@ nope:
 
 install:
 	# Put the executable in a safe place.
-	cp adderall /usr/bin
+	mkdir -p /usr/local/bin
+	cp adderall /usr/local/bin
 	# Adderall runs as an agent, not a daemon, because what's the point of
 	# running when the user isn't logged in?
 	#
@@ -18,4 +19,4 @@ install:
 uninstall:
 	# Goodnight, sweet prince.
 	launchctl unload /Library/LaunchAgents/adderall.plist
-	rm /usr/bin/adderall /Library/LaunchAgents/adderall.plist
+	rm /usr/local/bin/adderall /Library/LaunchAgents/adderall.plist
