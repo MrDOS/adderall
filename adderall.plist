@@ -8,10 +8,8 @@
         <array>
             <string>/usr/local/bin/adderall</string>
         </array>
-        <key>StandardOutPath</key>
-        <string>/var/log/adderall.log</string>
-        <key>StandardErrorPath</key>
-        <string>/var/log/adderall.err</string>
+        <key>RunAtLoad</key>
+        <true />
         <key>KeepAlive</key>
         <true />
     </dict>
