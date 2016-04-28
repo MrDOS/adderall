@@ -1,0 +1,6 @@
+#! /bin/sh
+
+if launchctl list adderall >/dev/null
+then
+    launchctl unload /Library/LaunchAgents/adderall.plist
+fi
