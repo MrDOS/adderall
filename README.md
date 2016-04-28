@@ -7,9 +7,9 @@
 The AirPort card in the 2013 MacBook Air is characterized by [high latency and
 poor throughput][1]. This seems to be because the AirPort card is too aggressive
 entering its power-saving mode. An effective (albeit blunt) solution is to
-quickly and repetitively issue ICMP echo requests to (i.e., “ping”) another host
-on the network. If these requests occur at least once every 0.2 seconds or so,
-the Wi-Fi adapter doesn't enter sleep and is consistently responsive.
+quickly and repetitively issue ICMP echo requests (i.e., “pings”) to another
+host on the network. If these requests occur at least once every 0.2 seconds or
+so, the Wi-Fi adapter doesn't enter sleep and is consistently responsive.
 
 Adderall keeps AirPorts awake by ensuring a steady flow of ping requests while
 a network connection is active.
